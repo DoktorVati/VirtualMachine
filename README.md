@@ -41,3 +41,6 @@ This Virtual Machine (VM) is a lightweight computing environment implemented in 
 2. Run/execute the file `myVM.py`
    
 3. View the Results inside `myVM_Output.txt`
+
+# For more details
+view the `Assignment-My Virtual Machine-Python-DESCRIPTION-Ver02.00.pdf`
