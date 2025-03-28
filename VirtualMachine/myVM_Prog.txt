@@ -1,0 +1,3 @@
+STO num1 23
+OUT num1
+HALT
