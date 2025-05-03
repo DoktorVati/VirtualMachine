@@ -1,3 +1,237 @@
-STO num1 23
-OUT num1
+
+
+MUL outputted -4 2
+OUT outputted
+; Display menu options
+
+OUT "Select an option:"
+
+OUT "1. Input two values and perform arithmetic operations"
+
+OUT "2. Enter a positive value for number and display numbers from 1 to that number"
+
+OUT "3. Enter a negative value for number and compute the sum from that number to 0"
+
+OUT "4. Exit the program"
+
+IN option
+
+
+
+; Branch to appropriate section based on the selected option
+
+SUB temp option 1
+
+; If option == 1, jump to option1
+
+BRz temp option1
+
+SUB temp option 2
+
+; If option == 2, jump to option2
+
+BRz temp option2
+
+SUB temp option 3
+
+; If option == 3, jump to option3
+
+BRz temp option3
+
+SUB temp option 4
+
+; If option == 4, jump to option4
+
+BRz temp option4
+
+; Otherwise, handle invalid options
+
+JMP invalidOption
+
+ 
+
+option1
+
+; Perform arithmetic operations on two input values
+
+OUT "Enter first value:"
+
+IN value1
+
+OUT "Enter second value:"
+
+IN value2
+
+ADD sum value1 value2
+
+OUT "Sum of the two values:"
+
+OUT sum
+
+SUB diff value1 value2
+
+OUT "Difference (value1 - value2):"
+
+OUT diff
+
+MUL prod value1 value2
+
+OUT "Product of the two values:"
+
+OUT prod
+
+DIV quotient value1 value2
+
+OUT "Quotient (value1 / value2):"
+
+OUT quotient
+
+JMP menu
+
+ 
+
+option2
+
+; Display numbers from 1 to the input number (inclusive)
+
+OUT "Enter a positive value for number:"
+
+IN number
+
+; If number < 0, go to invalidOption
+
+BRn number invalidOption
+
+; If number == 0, return to menu
+
+BRz number menu
+
+; Initialize counter to 1
+
+STO counter 1
+
+loopPositive
+
+OUT counter
+
+; Increment the counter
+
+ADD counter counter 1
+
+; Calculate (counter - number)
+
+SUB temp number counter
+
+; Continue loop while counter <= number
+
+BRzp temp loopPositive
+
+JMP menu
+
+ 
+
+option3
+
+; Compute the sum of numbers from a negative input to 0
+
+OUT "Enter a negative value for number:"
+
+IN number
+
+; If number > 0, go to invalidOption
+
+BRp number invalidOption
+
+; If number == 0, return to menu
+
+BRz number menu
+
+; Save the original input for output
+
+STO inputValue number
+
+; Initialize sum to 0
+
+STO sum 0
+
+loopNegative
+
+; Add the current number to the sum
+
+ADD sum sum number
+
+; Increment the number toward 0
+
+ADD number number 1
+
+; Loop while the number is still negative
+
+BRn number loopNegative
+
+OUT "Sum of numbers from"
+
+OUT inputValue
+
+OUT "to 0:"
+
+OUT sum
+
+JMP menu
+
+ 
+
+option4
+
+; Exit the program
+
+OUT "Have a nice day!"
+
 HALT
+
+ 
+
+invalidOption
+
+; Handle invalid options
+
+OUT "Invalid option selected. Please try again."
+
+JMP menu
+
+ 
+
+menu
+
+; Return to the main menu
+
+OUT "Select an option:"
+
+OUT "1. Input two values and perform arithmetic operations"
+
+OUT "2. Enter a positive value for number and display numbers from 1 to that number"
+
+OUT "3. Enter a negative value for number and compute the sum from that number to 0"
+
+OUT "4. Exit the program"
+
+IN option
+
+; Re-evaluate the menu options
+
+SUB temp option 1
+
+BRz temp option1
+
+SUB temp option 2
+
+BRz temp option2
+
+SUB temp option 3
+
+BRz temp option3
+
+SUB temp option 4
+
+BRz temp option4
+
+JMP invalidOption
